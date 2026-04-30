@@ -51,14 +51,20 @@ SerialHandler::~SerialHandler() {
 	close(fdes);
 }
 
-ssize_t SerialHandler::readData() {
+ssize_t SerialHandler::readData(int64_t *time = 0) {
 
 	/* Acquire read mutex */
 	std::lock_guard<std::mutex> lock(read_mtx);
 
 	/* Invalid fdes */
 	if (fdes < -1) return -1;
-	return read(fdes, buffer, sizeof(bfsize));
+	
+	ssize_t len = -1;
+	if ((len = read(fdes, buffer, sizeof(bfsize)))) {
+		if (time) (*time) = get_kernel_ns(); /* Set precise(ish) recv time */
+	}
+
+	return len;
 }
 
 ssize_t SerialHandler::writeData(uint8_t *data, int len) {
