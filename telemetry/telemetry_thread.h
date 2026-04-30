@@ -18,13 +18,16 @@
 #define HB_TIMEOUT 2000 /* In ms */
 #define TELEM_RECV_PERIOD 1 /* In ms */
 #define TELEM_SEND_PERIOD 1 /* In ms */
-#define TELEM_SYNC_PERIOD 50 /* In ms */
+#define TELEM_SYNC_PERIOD 100 /* In ms */
 
-#define SEND_BAUD B57600
-#define RECV_BAUD B57600
+#define SEND_BAUD B230400
+#define RECV_BAUD B230400
 
-#define EXP_ALPHA 0.1
+#define TELEM_FREQ 50 /* In Hz */
 
+#define EXP_ALPHA 0.3
+
+int64_t get_kernel_ns();
 
 class SerialHandler {
 	private:
@@ -46,7 +49,7 @@ class SerialHandler {
 		bool serialConnect();
 		bool checkConnection();
 		
-		ssize_t readData();
+		ssize_t readData(int64_t *time);
 		ssize_t writeData(uint8_t *data, int len);
 		const char *getBuffer();
 };
