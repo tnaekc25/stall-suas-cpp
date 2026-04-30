@@ -98,6 +98,10 @@ class TelemBuffer {
 		
 		void putData(UavData data);
 		UavData getData(uint32_t image_time);
+
+		uint32_t getMax() {
+			return max_time;
+		}
 };
 
 
