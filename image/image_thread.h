@@ -10,7 +10,7 @@
 #define SCORE_SAMPLE 150
 #define SCORE_TRESH 0.1
 
-#define ESTIMATED_FRAME_DELAY 0.4 /* In ms */
+#define ESTIMATED_FRAME_DELAY 5 /* In ms */
 
 int matchAndMap(TelemBuffer *telem_buffer, FrameQueue *frame_queue);
 
