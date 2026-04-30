@@ -38,7 +38,6 @@ bool SerialHandler::serialConnect() {
 	tty.c_oflag = 0;
 
 	tcflush(fdes, TCOFLUSH);
-	tcflush(fd, TCIOFLUSH);
 
 	return (tcsetattr(fdes, TCSANOW, &tty) == 0);
 }	
